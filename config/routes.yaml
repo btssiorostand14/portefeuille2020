@@ -1,0 +1,16 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+sio:
+     path: /accueil
+     controller: App\Controller\PtflController::index
+referentiel:
+     path: /referentiel
+     controller: App\Controller\PtflController::referentiel
+carnet:
+     path: /carnetbord/{pIdEtud}/{pAnnee},{pSemaine}
+     controller: App\Controller\PtflController::carnetbord 
+situation:
+     path: /situation/{pIdEtud}/{pIdSitu}
+     controller: App\Controller\PtflController::situation    
+

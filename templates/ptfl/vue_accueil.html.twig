@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+		
+		<h1>Etudiants par promotion</h1></br>
+{# templates/ptfl/vue_accueil.html.twig #}
+{% for p in pData["promos"] %}
+	<table border="1"><tr><th colspan=4>{{p.nom}} {{p.annee}}
+	<tr><th>Etudiant.e<th>Carnet de bord stage 1<th>Carnet de bord stage 2<th>Situations
+	{% for e in pData["etudiants"]%}
+		{% if e.numGroupe==p.num %}
+			<tr><td>{{e.prenom }} {{e.nom}}
+			<td><a href="carnetbord/{{e.num}}/1,0">consulter</a>
+			<td><a href="carnetbord/{{e.num}}/1/0">consulter</a>
+			<td>{% for s in pData["situations"] %}
+					{% if s.numetudiant==e.num %}
+						<a href="situation/{{e.num}}/{{s.ref}}">{{s.libcourt}}</a><br/>
+					{% endif %}
+			    {% endfor %}
+		{% endif %}
+	{% endfor %}
+	</table><br/>
+{% endfor %}
+
+    </body>
+</html>

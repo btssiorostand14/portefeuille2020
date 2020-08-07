@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<link rel="stylesheet" media="screen" type="text/css" title="Portefeuille" href="../style.css" />
+       
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Carnet de bord{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+		
+		<h1>Carnet de bord stage {{ pData['annee']}} de {{ pData['etudiant'].prenom }} {{ pData['etudiant'].nom}}</h1>
+{# templates/ptfl/vue_carnet.html.twig #}
+
+<table><tr bgcolor="AABBCC">
+	<td><a href="../{{ pData['etudiant'].num}}/{{pData['annee']}},0">Infos Stage</a>
+	<td><a href="../{{ pData['etudiant'].num}}/{{pData['annee']}},1">Semaine 1</a>
+	<td><a href="../{{ pData['etudiant'].num}}/{{pData['annee']}},2">Semaine 2</a>
+	<td><a href="../{{ pData['etudiant'].num}}/{{pData['annee']}},3">Semaine 3</a>
+	<td><a href="../{{ pData['etudiant'].num}}/{{pData['annee']}},4">Semaine 4</a>
+	<td><a href="../{{ pData['etudiant'].num}}/{{pData['annee']}},5">Semaine 5</a>
+{% if pData['annee']==2 %}
+	<td><a href="../{{ pData['etudiant'].num}}/{{pData['annee']}},6">Semaine 6</a>
+	<td><a href="../{{ pData['etudiant'].num}}/{{pData['annee']}},7">Semaine 7</a>
+{% endif %}
+</table>
+{% if pData["semaine"]==0 %}
+	{% set form=pData["formCarnet"] %}
+{% else %}
+	{% set form=pData["formSemaineCarnet"] %}
+{% endif %}
+	{{ form_start(form) }}
+	{{ form_widget(form) }}
+	{{ form_end(form) }}
+
+{% if pData["semaine"]>0 %}
+	<br/>
+	<table border=1>
+		<tr><th>Jour<th>Durée<th>Description<th>Domaine
+	{% for tache in pData["lesTaches"] %}
+		<tr><td>{{ tache.jour }}<td>{{ tache.duree }}<td>{{ tache.description }}<td>{{ tache.iddomaine }}
+	{% endfor %}
+	</table>
+{% endif %}
+
+
+    </body>
+</html>

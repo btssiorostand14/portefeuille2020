@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<link rel="stylesheet" media="screen" type="text/css" title="Portefeuille" href="../style.css" />
+       
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Carnet de bord{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+		
+		<h1>Situation :</h1>
+		<h2> {{ pData["situation"].libcourt }} de {{ pData["etudiant"].prenom }} {{ pData["etudiant"].nom}}</h2>
+{# templates/ptfl/vue_situation.html.twig #}
+
+ 
+
+	{% set form=pData["formSitu"] %}
+
+	{{ form_start(form) }}
+	{{ form_widget(form) }}
+	{{ form_end(form) }}
+
+
+    </body>
+</html>

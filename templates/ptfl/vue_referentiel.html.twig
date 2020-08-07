@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+		
+		<h1>Référentiel du BTS SIO 2019</h1>
+{# templates/ptfl/vue_referentiel.html.twig #}
+<table border=1>
+{% block tableau %}
+	{% set i=1 %}
+	{% for d in pData["domaines"] %} 
+	<tr><td><h3>{{ d.nomenclature }} - {{ d.libelle }}</h3></tr>
+	 {% for a in pData["activites"]  %}
+	 {% if a.idDomaine==d.id %}
+	 	<tr><td><b>{{a.nomenclature}} {{a.libelle}}</b></tr>
+	 
+	 	{% for c in  pData["competences"]  %}
+		 {% if c.idActivite==a.id %}
+		 	<tr><td> {{c.nomenclature}} {{c.libelle}}</tr>
+		 {% endif %}
+		 {% endfor %}
+	 {% endif %}
+	 {% endfor %}
+	{% endfor %}
+{% endblock %}
+</table>
+
+    </body>
+</html>
