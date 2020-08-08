@@ -14,14 +14,44 @@
 		<h1>Situation :</h1>
 		<h2> {{ pData["situation"].libcourt }} de {{ pData["etudiant"].prenom }} {{ pData["etudiant"].nom}}</h2>
 {# templates/ptfl/vue_situation.html.twig #}
-
+<table><tr bgcolor="AABBCC">
+	<td><a href="../{{ pData['etudiant'].num}}/{{pData['situation'].ref}},0">Description</a>
+	<td><a href="../{{ pData['etudiant'].num}}/{{pData['situation'].ref}},1">Activités</a>
+	<td><a href="../{{ pData['etudiant'].num}}/{{pData['situation'].ref}},2">Reformulations</a>
+	<td><a href="../{{ pData['etudiant'].num}}/{{pData['situation'].ref}},3">Productions</a>
+	<td><a href="../{{ pData['etudiant'].num}}/{{pData['situation'].ref}},4">Commentaires</a>
   
-
-	{% set form=pData["formSitu"] %}
-
-	{{ form_start(form) }}
-	{{ form_widget(form) }}
-	{{ form_end(form) }}
+</table>
+	{% if pData["onglet"]==0 %}
+		{% set form = pData["form"] %}
+		{{ form_start(form) }}
+		{{ form_widget(form) }}
+		{{ form_end(form) }}
+	{% elseif pData["onglet"]==1 %}
+		<table><th>Code<th>Domaine<th>Nomenclature<th>libelle
+			{% for a in pData["activites"]%}
+				<tr><td>{{a.id}}<td>{{a.iddomaine}}<td>{{a.nomenclature}}<td>{{a.libelle}}
+			{% endfor %}
+		</table>
+	{% elseif pData["onglet"]==2 %}
+		<table><th>CodeActivite<th>Situation<th>Reformulation
+			{% for a in pData["activites"]%}
+				<tr><td>{{a.idactivite}}<td>{{a.refsituation}}<td>{{a.commentaire}}
+			{% endfor %}
+		</table>
+	{% elseif pData["onglet"]==3 %}
+		<table><th>Code<th>Situation<th>Désignation<th>Lien
+			{% for p in pData["productions"]%}
+				<tr><td>{{p.numero}}<td>{{p.refsituation}}<td>{{p.designation}}<td>{{p.adresse}}
+			{% endfor %}
+		</table>
+	{% else %}
+		<table><th>Code<th>Situation<th>Prof<th>Commentaire<th>Date
+			{% for c in pData["commentaires"]%}
+				<tr><td>{{c.numero}}<td>{{c.refsituation}}<td>{{c.numprofesseur}}<td>{{c.commentaire}}<td>
+			{% endfor %}
+		</table>
+	{% endif %}
 
 
     </body>

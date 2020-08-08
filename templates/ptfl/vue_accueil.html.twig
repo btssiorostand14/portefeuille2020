@@ -18,10 +18,10 @@
 		{% if e.numGroupe==p.num %}
 			<tr><td>{{e.prenom }} {{e.nom}}
 			<td><a href="carnetbord/{{e.num}}/1,0">consulter</a>
-			<td><a href="carnetbord/{{e.num}}/1/0">consulter</a>
+			<td><a href="carnetbord/{{e.num}}/2,0">consulter</a>
 			<td>{% for s in pData["situations"] %}
 					{% if s.numetudiant==e.num %}
-						<a href="situation/{{e.num}}/{{s.ref}}">{{s.libcourt}}</a><br/>
+						<a href="situation/{{e.num}}/{{s.ref}},0">{{s.libcourt}}</a><br/>
 					{% endif %}
 			    {% endfor %}
 		{% endif %}

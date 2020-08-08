@@ -11,6 +11,6 @@ carnet:
      path: /carnetbord/{pIdEtud}/{pAnnee},{pSemaine}
      controller: App\Controller\PtflController::carnetbord 
 situation:
-     path: /situation/{pIdEtud}/{pIdSitu}
+     path: /situation/{pIdEtud}/{pIdSitu},{pPage}
      controller: App\Controller\PtflController::situation    
 

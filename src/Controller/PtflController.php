@@ -5,6 +5,9 @@ namespace App\Controller;
 use App\Entity\PortEtudiant;
 use App\Entity\PortDomaine;
 use App\Entity\PortActivite;
+use App\Entity\PortActivitecitee;
+use App\Entity\PortCommentaire;
+use App\Entity\PortProduction;
 use App\Entity\PortCompetence;
 use App\Entity\PortCarnetbord;
 use App\Entity\PortSemainecarnet;
@@ -55,15 +58,40 @@ class PtflController extends AbstractController
    }
    
    /***************** Gestion des situations ****************************/
-   public function situation($pIdEtud, $pIdSitu){
+   public function situation($pIdEtud, $pIdSitu, $pPage){
    		//permet l'affichage des infos d'une situation
    		$data=array();
    		$situations=$this->getDoctrine()->getRepository(PortSituation::class);
    		$laSituation=$situations->findOneBy(['ref' => $pIdSitu],);
    		$data["situation"]=$laSituation;
    		$data["etudiant"]=$this->getEtudiants()->findOneBy(['num' => $pIdEtud,]);
-   		$formSitu = $this->createForm(SituationType::class, $laSituation);
-    	$data["formSitu"]=$formSitu->createView();
+   		$data["onglet"]=$pPage;
+   		switch ($pPage) {
+   			case 0: //description
+   				$form = $this->createForm(SituationType::class, $laSituation);
+    			$data["form"]=$form->createView();
+    			break;
+    		case 1: //activités à choisir
+    			$activites=$this->getDoctrine()->getRepository(PortActivite::class);
+   				$lesActivites=$activites->findAll();
+    			$data["activites"]=$lesActivites;
+    			break;
+    		case 2: //reformulations
+    			$activites=$this->getDoctrine()->getRepository(PortActiviteCitee::class);
+   				$lesActivitesCitees=$activites->findBy(['refsituation' => $pIdSitu,]);
+    			$data["activites"]=$lesActivitesCitees;
+    			break;
+    		Case 3: //productions
+    			$productions=$this->getDoctrine()->getRepository(PortProduction::class);
+   				$lesProd=$productions->findBy(['refsituation' => $pIdSitu,]);
+   				$data["productions"]=$lesProd;
+    			break;
+    		Case 4: //commentaires
+    			$commentaires=$this->getDoctrine()->getRepository(PortCommentaire::class);
+   				$lesComm=$commentaires->findBy(['refsituation' => $pIdSitu,]);
+   				$data["commentaires"]=$lesComm;
+    			break;
+   		}
     	return $this->render('ptfl/vue_situation.html.twig', [
             'pData' => $data,]);	
     	

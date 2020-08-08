@@ -16,14 +16,14 @@ return [
         0 => '{^(?'
                 .'|/_error/(\\d+)(?:\\.([^/]++))?(*:35)'
                 .'|/carnetbord/([^/]++)/([^/,]++),([^/]++)(*:81)'
-                .'|/situation/([^/]++)/([^/]++)(*:116)'
+                .'|/situation/([^/]++)/([^/,]++),([^/]++)(*:126)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
         35 => [[['_route' => '_preview_error', '_controller' => 'error_controller::preview', '_format' => 'html'], ['code', '_format'], null, null, false, true, null]],
         81 => [[['_route' => 'carnet', '_controller' => 'App\\Controller\\PtflController::carnetbord'], ['pIdEtud', 'pAnnee', 'pSemaine'], null, null, false, true, null]],
-        116 => [
-            [['_route' => 'situation', '_controller' => 'App\\Controller\\PtflController::situation'], ['pIdEtud', 'pIdSitu'], null, null, false, true, null],
+        126 => [
+            [['_route' => 'situation', '_controller' => 'App\\Controller\\PtflController::situation'], ['pIdEtud', 'pIdSitu', 'pPage'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
     ],

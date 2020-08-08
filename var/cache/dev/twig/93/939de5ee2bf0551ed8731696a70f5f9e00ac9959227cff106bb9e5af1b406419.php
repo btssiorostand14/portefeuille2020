@@ -97,7 +97,7 @@ class __TwigTemplate_e1c966abe63229e9da491e5d0198c705fbfabc72943295479337233d3bb
 \t\t\t<td><a href=\"carnetbord/";
                     // line 21
                     echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["e"], "num", [], "any", false, false, false, 21), "html", null, true);
-                    echo "/1/0\">consulter</a>
+                    echo "/2,0\">consulter</a>
 \t\t\t<td>";
                     // line 22
                     $context['_parent'] = $context;
@@ -111,7 +111,7 @@ class __TwigTemplate_e1c966abe63229e9da491e5d0198c705fbfabc72943295479337233d3bb
                             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["e"], "num", [], "any", false, false, false, 24), "html", null, true);
                             echo "/";
                             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["s"], "ref", [], "any", false, false, false, 24), "html", null, true);
-                            echo "\">";
+                            echo ",0\">";
                             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["s"], "libcourt", [], "any", false, false, false, 24), "html", null, true);
                             echo "</a><br/>
 \t\t\t\t\t";
@@ -234,10 +234,10 @@ class __TwigTemplate_e1c966abe63229e9da491e5d0198c705fbfabc72943295479337233d3bb
 \t\t{% if e.numGroupe==p.num %}
 \t\t\t<tr><td>{{e.prenom }} {{e.nom}}
 \t\t\t<td><a href=\"carnetbord/{{e.num}}/1,0\">consulter</a>
-\t\t\t<td><a href=\"carnetbord/{{e.num}}/1/0\">consulter</a>
+\t\t\t<td><a href=\"carnetbord/{{e.num}}/2,0\">consulter</a>
 \t\t\t<td>{% for s in pData[\"situations\"] %}
 \t\t\t\t\t{% if s.numetudiant==e.num %}
-\t\t\t\t\t\t<a href=\"situation/{{e.num}}/{{s.ref}}\">{{s.libcourt}}</a><br/>
+\t\t\t\t\t\t<a href=\"situation/{{e.num}}/{{s.ref}},0\">{{s.libcourt}}</a><br/>
 \t\t\t\t\t{% endif %}
 \t\t\t    {% endfor %}
 \t\t{% endif %}
